@@ -17,7 +17,7 @@ export default function PostDetail() {
     <>
       <div>{post.id} 번 게시글 상세</div>
       <div>{post.title}</div>
-      <div>{post.body}</div>
+      <div>{post.id}</div>
     </>
   )
 }
