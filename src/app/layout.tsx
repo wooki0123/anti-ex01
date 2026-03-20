@@ -24,8 +24,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ko" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body>{children}</body>
+    <html
+      lang="ko"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body>
+        <header>
+          <nav>
+            <a href="/">메인</a>
+            <a href="/posts">포스트</a>
+          </nav>
+        </header>
+        {children}
+        <footer>풋터</footer>
+      </body>
     </html>
   )
 }
