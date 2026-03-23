@@ -38,6 +38,9 @@ export default function RootLayout({
             <Link href="/posts" className="p-2">
               포스트
             </Link>
+            <Link href="/signup" className="p-2">
+              회원가입
+            </Link>
           </nav>
         </header>
         {children}
