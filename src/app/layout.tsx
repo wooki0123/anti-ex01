@@ -1,7 +1,8 @@
 //기초 레이아웃 담당 이름변경은 하지 않기
+
+import Nav from '@/components/Nav'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import Link from 'next/link'
 import './globals.css'
 
 const geistSans = Geist({
@@ -31,17 +32,7 @@ export default function RootLayout({
     >
       <body>
         <header>
-          <nav>
-            <Link href="/" className="p-2">
-              메인
-            </Link>
-            <Link href="/posts" className="p-2">
-              포스트
-            </Link>
-            <Link href="/signup" className="p-2">
-              회원가입
-            </Link>
-          </nav>
+          <Nav />
         </header>
         {children}
         <footer className="p-2">풋터</footer>
