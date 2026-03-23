@@ -1,14 +1,16 @@
 'use client'
 
-import { supabase } from '@/app/supabase/supabase'
+import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function PostList() {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<
+    Array<{ id: number; title: string; content: string }>
+  >([])
 
   const fetchData = async () => {
-    const { data: posts, error } = await supabase.from('posts').select('*')
+    let { data: posts, error } = await supabase.from('posts').select('*')
     setPosts(posts ?? [])
   }
 

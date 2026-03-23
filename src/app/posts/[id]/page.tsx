@@ -1,5 +1,6 @@
 'use client'
 
+import { supabase } from '@/lib/supabase'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -7,10 +8,13 @@ export default function PostDetail() {
   const { id } = useParams()
   const [post, setPost] = useState({})
 
+  const fetchPosts = async () => {
+    let { data: posts, error } = await supabase.from('posts').select('*')
+    setPost(posts)
+  }
+
   useEffect(() => {
-    fetch(`https://dummyjson.com/posts/${id}`)
-      .then((res) => res.json())
-      .then((res) => setPost(res))
+    fetchPosts()
   }, [])
 
   return (
