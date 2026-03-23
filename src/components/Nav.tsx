@@ -1,10 +1,12 @@
 'use client'
 import { supabase } from '@/lib/supabase'
+import { User } from '@supabase/supabase-js'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 export default function Nav() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
 
   const fetchUser = async () => {
     const {
@@ -13,13 +15,27 @@ export default function Nav() {
     setUser(user)
   }
 
+  const router = useRouter()
+
   useEffect(() => {
     fetchUser()
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => {
+      data.subscription.unsubscribe()
+    }
   }, [])
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    fetchUser()
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.log(error)
+    } else {
+      alert('로그아웃 성공')
+      router.push('/signin')
+    }
   }
 
   return (
