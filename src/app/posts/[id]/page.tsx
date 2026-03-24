@@ -1,6 +1,7 @@
 'use client'
 
 import { supabase } from '@/lib/supabase'
+import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -70,7 +71,15 @@ export default function PostDetail() {
           <li key={comment.id}> - {comment.content}</li>
         ))}
       </ul>
-      <button onClick={() => handleOnClick(post.id)}>삭제</button>
+      <button
+        className="p-2 rounded border-1 hover:bg-gray-200"
+        onClick={() => handleOnClick(post.id)}
+      >
+        삭제
+      </button>
+      <Link href={`/posts/${post.id}/edit`}>
+        <button className="p-2 rounded border-1 hover:bg-gray-200">수정</button>
+      </Link>
     </>
   )
 }
