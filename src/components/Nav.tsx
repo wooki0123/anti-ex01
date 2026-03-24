@@ -7,18 +7,9 @@ import { useEffect, useState } from 'react'
 
 export default function Nav() {
   const [user, setUser] = useState<User | null>(null)
-
-  const fetchUser = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-    setUser(user)
-  }
-
   const router = useRouter()
 
   useEffect(() => {
-    fetchUser()
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
     })
@@ -47,7 +38,12 @@ export default function Nav() {
         글목록
       </Link>
       {user ? (
-        <button onClick={handleLogout}>로그아웃</button>
+        <>
+          <div className="p-2 rounded hover:bg-gray-200">
+            {user.email}님 반갑습니다.
+          </div>
+          <button onClick={handleLogout}>로그아웃</button>
+        </>
       ) : (
         <>
           <Link href="/signup" className="p-2 rounded hover:bg-gray-200">

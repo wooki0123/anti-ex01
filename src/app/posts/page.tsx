@@ -32,6 +32,7 @@ export default function PostList() {
           </Link>
         </li>
       ))}
+      <Link href={`/posts/new`}>글 등록</Link>
     </ul>
   )
 }
